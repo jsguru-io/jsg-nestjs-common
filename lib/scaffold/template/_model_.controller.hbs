@@ -1,0 +1,63 @@
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+  Query,
+  HttpCode,
+} from '@nestjs/common';
+import { PaginatedSet } from '../common/crud';
+import { QueryParamsDTO } from '../common/http/query-params.dto';
+import { {{ pascalName }}DTO, Paginated{{ pascalName }}Set } from './dto/{{ kebabName }}.dto';
+import { {{ pascalName }} } from './model/{{ kebabName }}.model';
+import { {{ pascalName }}Service } from './{{ kebabName }}.service';
+import { ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+
+@ApiTags('{{ pascalName }}')
+@Controller('{{ pluralKebabName }}')
+export class {{ pascalName }}Controller {
+  constructor(private readonly {{ camelName }}Service: {{ pascalName }}Service) {}
+
+  @ApiOkResponse({ type: Paginated{{ pascalName }}Set })
+  @Get('all')
+  async findAll(): Promise<PaginatedSet<{{ pascalName }}[]>> {
+    return this.{{ camelName }}Service.findAll();
+  }
+
+  @ApiOkResponse({ type: Paginated{{ pascalName }}Set })
+  @Get()
+  async find(@Query() query: QueryParamsDTO): Promise<PaginatedSet<{{ pascalName }}[]>> {
+    return this.{{ camelName }}Service.findPaginated(query);
+  }
+
+  @ApiOkResponse({ type: {{ pascalName }} })
+  @Post()
+  async create(@Body() payload: {{ pascalName }}DTO): Promise<{{ pascalName }}> {
+    return this.{{ camelName }}Service.create(payload);
+  }
+
+  @ApiOkResponse({ type: {{ pascalName }} })
+  @Get(':id')
+  async findById(@Param('id') id: string): Promise<{{ pascalName }}> {
+    return this.{{ camelName }}Service.findById(id);
+  }
+
+  @ApiOkResponse({ type: {{ pascalName }} })
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() payload: {{ pascalName }}DTO,
+  ): Promise<{{ pascalName }}> {
+    return this.{{ camelName }}Service.update(id, payload);
+  }
+
+  @ApiNoContentResponse()
+  @Delete(':id')
+  @HttpCode(204)
+  async remove(@Param('id') id: string): Promise<void> {
+    return this.{{ camelName }}Service.remove(id);
+  }
+}
