@@ -1,6 +1,6 @@
 import { Model } from 'sequelize-typescript';
 import { CreationAttributes, Attributes } from 'sequelize/types/model';
-import { Constructor } from '../../util';
+import { Constructor } from '../util';
 
 export type ModelType<T extends Model<T>> = Constructor<T> & typeof Model;
 export type ModelPayload<T> = Partial<Omit<T, keyof Model<T>>>;
