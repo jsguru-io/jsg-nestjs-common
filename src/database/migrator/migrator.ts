@@ -31,7 +31,7 @@ export class Migrator implements IMigrator {
           [
             filepath,
             fs
-              .readFileSync(path.join(__dirname, 'sample-migration.ts'))
+              .readFileSync(path.join(__dirname, 'sample-migration.tmp'))
               .toString(),
           ],
         ],
