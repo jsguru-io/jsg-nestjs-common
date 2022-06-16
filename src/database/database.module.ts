@@ -1,4 +1,4 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import { DynamicModule, Global, Module } from '@nestjs/common';
 import { databaseProviders } from './database.providers';
 import {
   DATABASE_OPTIONS_TOKEN,
@@ -8,6 +8,7 @@ import {
 } from './const';
 import { RegisterAsyncOptions, RegisterOptions } from './type/options.type';
 
+@Global()
 @Module({
   imports: [],
   providers: [...databaseProviders],
