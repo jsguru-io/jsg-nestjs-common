@@ -11,13 +11,7 @@ import { RegisterAsyncOptions, RegisterOptions } from './type/options.type';
 @Global()
 @Module({
   imports: [],
-  providers: [
-    ...databaseProviders,
-    {
-      provide: DATABASE_OPTIONS_TOKEN,
-      useValue: {},
-    },
-  ],
+  providers: [...databaseProviders],
   exports: [SEQUELIZE_TOKEN, MIGRATOR_TOKEN, MODEL_FACTORY_TOKEN],
 })
 export class DatabaseModule {
