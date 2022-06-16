@@ -8,7 +8,11 @@ import {
 } from './const';
 import { RegisterAsyncOptions, RegisterOptions } from './type/options.type';
 
-@Module({})
+@Module({
+  imports: [],
+  providers: [...databaseProviders],
+  exports: [SEQUELIZE_TOKEN, MIGRATOR_TOKEN, MODEL_FACTORY_TOKEN],
+})
 export class DatabaseModule {
   static register(options: RegisterOptions): DynamicModule {
     return {
