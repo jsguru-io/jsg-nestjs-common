@@ -1,6 +1,6 @@
 {
   "name": "@jsgurucompany/jsg-nestjs-common",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Initial README.md",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,7 +19,9 @@
     "type": "git",
     "url": "git@github.com:jsguru-io/jsg-nestjs-common.git"
   },
-  "assets":["**/*.template"],
+  "assets": [
+    "**/*.template"
+  ],
   "files": [
     "lib/**/*"
   ],
