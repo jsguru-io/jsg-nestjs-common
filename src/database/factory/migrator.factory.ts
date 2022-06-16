@@ -6,11 +6,13 @@ import { DatabaseModuleOptions } from '../type/options.type';
 
 export const migratorFactory = async (
   sequelize: Sequelize,
-  { migrator }: DatabaseModuleOptions,
+  options?: DatabaseModuleOptions,
 ): Promise<IMigrator> => {
   return new Migrator({
-    migrationsGlob: migrator.glob ?? '**/{migrations,migration}/*.migration.ts',
-    migrationsPath: migrator.path ?? `${__dirname}/../../../migration/`,
+    migrationsGlob:
+      options?.migrator?.glob ?? '**/{migrations,migration}/*.migration.ts',
+    migrationsPath:
+      options?.migrator?.path ?? `${__dirname}/../../../migration/`,
     context: sequelize.getQueryInterface(),
     storage: new SequelizeStorage({
       sequelize,

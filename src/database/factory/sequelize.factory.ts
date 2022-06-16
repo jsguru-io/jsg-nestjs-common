@@ -2,9 +2,14 @@ import { Sequelize } from 'sequelize-typescript';
 import * as _ from 'lodash';
 import { DatabaseModuleOptions } from '../type/options.type';
 
-export const sequelizeFactory = async ({
-  connection,
-}: DatabaseModuleOptions): Promise<Sequelize> => {
+export const sequelizeFactory = async (
+  options?: DatabaseModuleOptions,
+): Promise<Sequelize> => {
+  if (!options) {
+    return new Sequelize();
+  }
+  const { connection } = options;
+
   return new Sequelize({
     dialect: 'postgres',
     host: connection.host,

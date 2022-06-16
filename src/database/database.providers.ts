@@ -7,7 +7,7 @@ import {
 } from './const';
 import { migratorFactory, sequelizeFactory } from './factory';
 import { MigratorCommand } from './command';
-import { ModelFactory } from './factory/model.factory';
+import { ModelFactory } from './factory';
 
 export const databaseProviders: Provider[] = [
   {
