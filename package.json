@@ -19,6 +19,7 @@
     "type": "git",
     "url": "git@github.com:jsguru-io/jsg-nestjs-common.git"
   },
+  "assets":["**/*.template"],
   "files": [
     "lib/**/*"
   ],
