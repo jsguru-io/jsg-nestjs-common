@@ -3,7 +3,14 @@ import { InjectionToken } from '@nestjs/common';
 
 export type ConnectionOptions = Pick<
   SequelizeOptions,
-  'host' | 'port' | 'database' | 'username' | 'password' | 'ssl' | 'logging'
+  | 'host'
+  | 'port'
+  | 'database'
+  | 'username'
+  | 'password'
+  | 'ssl'
+  | 'logging'
+  | 'models'
 >;
 
 export interface MigratorOptions {

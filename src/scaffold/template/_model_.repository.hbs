@@ -1,0 +1,8 @@
+import { BaseRepository } from '../common/crud';
+import { {{ pascalName }} } from './model/{{ kebabName }}.model';
+
+export class {{ pascalName }}Repository extends BaseRepository<{{ pascalName }}> {
+  constructor() {
+    super({{ pascalName }});
+  }
+}

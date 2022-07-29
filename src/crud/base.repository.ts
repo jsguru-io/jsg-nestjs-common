@@ -4,7 +4,7 @@ import {
   ModelAttributes,
   ModelCreationAttributes,
   ModelPayload,
-  ModelType,
+  BaseModelType,
   PaginationParams,
   ResultsWithCountSet,
 } from './type';
@@ -14,7 +14,7 @@ export abstract class BaseRepository<T extends Model<T>> {
   defaultLimit = 10;
   defaultOffset = 0;
 
-  protected constructor(protected readonly model: ModelType<T>) {}
+  protected constructor(protected readonly model: BaseModelType<T>) {}
 
   protected resolveLimit(limit: number = this.defaultLimit): number {
     return limit > this.maxLimit ? this.maxLimit : limit;
