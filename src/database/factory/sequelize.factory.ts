@@ -17,7 +17,6 @@ export const sequelizeFactory = async (
     username: connection.username,
     password: connection.password,
     database: connection.database,
-    // models: [`${__dirname}/../../../**/*.model.{ts,js}`],
     models: connection.models ?? [],
     logging: connection.logging ?? false,
     modelMatch: (filename: string, member) => {
