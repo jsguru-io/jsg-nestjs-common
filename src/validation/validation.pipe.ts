@@ -1,13 +1,45 @@
-import { ValidationError, ValidationPipe } from '@nestjs/common';
-import { HttpErrorByCode } from '@nestjs/common/utils/http-error-by-code.util';
+import {
+  ArgumentMetadata,
+  Injectable,
+  ValidationError,
+  ValidationPipe,
+  ValidationPipeOptions,
+} from '@nestjs/common';
 import { AppValidationError } from './type';
 
+@Injectable()
 export class AppValidationPipe extends ValidationPipe {
-  createExceptionFactory(): (validationErrors?: ValidationError[]) => unknown {
-    return (validationErrors: ValidationError[]) => {
-      const errors = this.transformValidationErrors(validationErrors);
-      return new HttpErrorByCode[this.errorHttpStatusCode](errors);
-    };
+  private classTransformer: any;
+  private classValidator: any;
+
+  constructor(private readonly options: ValidationPipeOptions) {
+    super(options ?? {});
+    this.classTransformer = this.loadTransformer();
+    this.classValidator = this.loadValidator();
+  }
+
+  protected throwException(errors: AppValidationError[]) {
+    return this.exceptionFactory(errors);
+  }
+
+  async transform(value: any, metadata: ArgumentMetadata) {
+    const metatype = metadata.metatype;
+    const entity = this.classTransformer.plainToClass(
+      metatype,
+      value,
+      this.transformOptions,
+    );
+
+    const rawErrors = await this.classValidator.validate(
+      entity,
+      this.validatorOptions,
+    );
+    if (rawErrors.length > 0) {
+      const errors: AppValidationError[] =
+        this.transformValidationErrors(rawErrors);
+      throw this.throwException(errors);
+    }
+    return value;
   }
 
   private transformValidationErrors(
