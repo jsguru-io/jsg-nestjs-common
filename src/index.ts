@@ -6,3 +6,4 @@ export * from './http';
 export * from './scaffold';
 export * from './validation';
 export * from 'sequelize-typescript';
+export * from './orm';
